@@ -13,7 +13,6 @@ import org.instancio.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 @Getter
 @Component
 public class ModelGenerator {
@@ -40,7 +39,6 @@ public class ModelGenerator {
                 .supply(Select.field(User::getLastName), () -> faker.name().lastName())
                 .supply(Select.field(User::getEmail), () -> faker.internet().emailAddress())
                 .supply(Select.field(User::getPasswordDigest), () -> faker.internet().password(3, 100))
-                .ignore(Select.field(User::getTasks))
                 .toModel();
 
         taskModel = Instancio.of(Task.class)
@@ -55,7 +53,6 @@ public class ModelGenerator {
 
         taskStatusModel = Instancio.of(TaskStatus.class)
                 .ignore(Select.field(TaskStatus::getId))
-                .ignore(Select.field(TaskStatus::getTasks))
                 .supply(Select.field(TaskStatus::getName), () -> faker.lorem().word())
                 .supply(Select.field(TaskStatus::getSlug), () -> faker.internet().slug())
                 .toModel();
@@ -63,7 +60,6 @@ public class ModelGenerator {
         labelModel = Instancio.of(Label.class)
                 .ignore(Select.field(Label::getId))
                 .supply(Select.field(Label::getName), () -> faker.lorem().characters(3, 8))
-                .ignore(Select.field(Label::getTasks))
                 .toModel();
     }
 }

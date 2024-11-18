@@ -7,6 +7,9 @@ install:
 test:
 	./gradlew test
 
+lint:
+	./gradlew checkstyleMain
+
 report:
 	./gradlew jacocoTestReport
 

@@ -1,14 +1,11 @@
 package hexlet.code.model;
 
-import static jakarta.persistence.GenerationType.IDENTITY;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
@@ -16,17 +13,17 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
+import java.time.LocalDate;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "statuses")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"name", "slug"})
+@EqualsAndHashCode(of = {"id", "name", "slug"})
 public class TaskStatus implements BaseEntity {
 
     @Id
