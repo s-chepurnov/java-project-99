@@ -108,7 +108,7 @@ public class LabelControllerTest {
                 .andReturn();
 
         var body = result.getResponse().getContentAsString();
-        List<LabelDTO> labelDTOS = om.readValue(body, new TypeReference<>() {});
+        List<LabelDTO> labelDTOS = om.readValue(body, new TypeReference<>() { } );
         List<Label> actual = labelDTOS.stream().map(labelMapper::map).toList();
         List<Label> expected = labelRepository.findAll();
 
