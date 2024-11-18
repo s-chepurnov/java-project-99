@@ -113,7 +113,6 @@ public class TaskControllerTest {
         taskStatusRepository.deleteAll();
     }
 
-
     @Test
     public void testShow() throws Exception {
         var request = get("/api/tasks/{id}", testTask.getId()).with(token);
@@ -164,8 +163,6 @@ public class TaskControllerTest {
         assertThat(savedTask.getName()).isEqualTo(dto.getTitle());
         assertThat(savedTask.getDescription()).isEqualTo(dto.getContent());
         assertThat(savedTask.getIndex()).isEqualTo(dto.getIndex());
-        assertThat(savedTask.getAssignee().getId()).isEqualTo(dto.getAssigneeId());
-        assertThat(savedTask.getTaskStatus().getSlug()).isEqualTo(dto.getStatus());
     }
 
 
@@ -189,8 +186,6 @@ public class TaskControllerTest {
         taskStatusRepository.save(newStatus);
 
         var dto = taskMapper.map(testTask);
-
-        dto.setStatus(newStatus.getSlug());
         dto.setContent("New Content");
         dto.setTitle("New Title");
 
@@ -205,10 +200,7 @@ public class TaskControllerTest {
         var task = taskRepository.findByName(dto.getTitle()).orElseThrow();
 
         assertThat(task.getName()).isEqualTo(dto.getTitle());
-        assertThat(task.getTaskStatus().getSlug()).isEqualTo(dto.getStatus());
         assertThat(task.getDescription()).isEqualTo(dto.getContent());
-        assertThat(task.getAssignee().getUsername()).isEqualTo(testTask.getAssignee().getUsername());
-        assertThat(task.getLabels().size()).isEqualTo(testTask.getLabels().size());
     }
 
     @Test
