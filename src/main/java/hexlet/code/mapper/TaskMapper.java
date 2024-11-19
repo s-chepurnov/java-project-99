@@ -8,16 +8,16 @@ import hexlet.code.model.Label;
 import hexlet.code.model.Task;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.model.User;
-import hexlet.code.repository.UserRepository;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
+import hexlet.code.repository.UserRepository;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.NullValuePropertyMappingStrategy;
-import org.mapstruct.ReportingPolicy;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
@@ -67,7 +67,10 @@ public abstract class TaskMapper {
 
     @Named("idToAssignee")
     public User idToAssignee(Long assigneeId) {
-        if (assigneeId == null || assigneeId == 0) return null;
+        if (assigneeId == null || assigneeId == 0) {
+            return null;
+        }
+
         return userRepository.findById(assigneeId).orElseThrow(
                 () -> new ResourceNotFoundException("User with id " + assigneeId + " not found"));
     }
