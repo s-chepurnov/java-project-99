@@ -65,9 +65,9 @@ public abstract class TaskMapper {
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "labelIdsToLabels")
     public abstract void update(TaskUpdateDTO taskUpdateDTO, @MappingTarget Task task);
 
-
     @Named("idToAssignee")
     public User idToAssignee(Long assigneeId) {
+        if (assigneeId == null || assigneeId == 0) return null;
         return userRepository.findById(assigneeId).orElseThrow(
                 () -> new ResourceNotFoundException("User with id " + assigneeId + " not found"));
     }

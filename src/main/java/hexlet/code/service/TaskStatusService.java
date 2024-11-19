@@ -5,12 +5,12 @@ import hexlet.code.dto.taskstatuses.TaskStatusDTO;
 import hexlet.code.dto.taskstatuses.TaskStatusUpdateDTO;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.TaskStatusMapper;
+import hexlet.code.model.TaskStatus;
 import hexlet.code.repository.TaskStatusRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 
 @Service
 @AllArgsConstructor
@@ -21,7 +21,7 @@ public class TaskStatusService {
 
 
     public TaskStatusDTO create(TaskStatusCreateDTO taskStatusCreateDTO) {
-        var taskStatus = taskStatusMapper.map(taskStatusCreateDTO);
+        TaskStatus taskStatus = taskStatusMapper.map(taskStatusCreateDTO);
         taskStatusRepository.save(taskStatus);
 
         return taskStatusMapper.map(taskStatus);
