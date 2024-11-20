@@ -20,7 +20,7 @@ public class TaskDTO {
     private String createdAt;
 
     @JsonProperty("assignee_id")
-    private long assigneeId;
+    private Long assigneeId;
 
     private String title;
 
